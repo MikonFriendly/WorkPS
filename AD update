@@ -1,0 +1,2 @@
+import-csv C:\Users\manderson\Documents\Students_EmailAddress_PS_20170828.csv | ForEach-Object {
+set-aduser $_.UserID -server DC-A201.EDU.NorQuest.ca -add @{extensionAttribute1=$_.EMAIL_ADDR}} 
