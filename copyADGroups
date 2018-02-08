@@ -1,0 +1,14 @@
+[CmdletBinding()]
+Param(
+[Parameter(Mandatory=$True,Position=1)]   [string]$originaluser,    
+
+[Parameter(Mandatory=$True)]   [string]$newuser
+)    
+Get-ADPrincipalGroupMembership -Identity $originaluser | foreach-object{ 
+$groupdn = $_.distinguishedname        
+$groupname = $_.name        
+$groups += $_        
+write-host "`t$groupname"        
+Add-ADGroupMember -identity $groupdn -members $newuser -confirm:$false
+}
+$groups | convertto-Csv | out-file -filepath C:\Output\GroupsAdded.csv
