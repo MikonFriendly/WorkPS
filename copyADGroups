@@ -11,4 +11,5 @@ $groups += $_       
 write-host "`t$groupname"        
 Add-ADGroupMember -identity $groupdn -members $newuser -confirm:$false
 }
-$groups | convertto-Csv | out-file -filepath C:\Output\GroupsAdded.csv
+$groups | write-output
+#convertto-Csv | out-file -filepath C:\Output\GroupsAdded.csv
